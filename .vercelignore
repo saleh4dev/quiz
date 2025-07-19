@@ -1,5 +1,5 @@
 node_modules
-client/node_modules
+client/
 .git
 .env
 .env.local
@@ -11,4 +11,9 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 .vscode
-.idea 
+.idea
+README.md
+DEPLOYMENT.md
+CUSTOM_HOSTING.md
+QUICK_DEPLOY.md
+QUICK_SERVER_DEPLOY.md 

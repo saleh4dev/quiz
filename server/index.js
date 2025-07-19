@@ -35,32 +35,33 @@ app.use('/api/quiz', require('./routes/quiz'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/admin', require('./routes/admin'));
 
-// Serve static files from React build
+// API Info route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'MyQuiz API Server',
+    status: 'running',
+    environment: process.env.NODE_ENV || 'development',
+    endpoints: {
+      auth: '/api/auth',
+      categories: '/api/categories',
+      questions: '/api/questions',
+      quiz: '/api/quiz',
+      users: '/api/users',
+      admin: '/api/admin'
+    }
+  });
+});
+
+// Serve static files from React build (if available)
 if (process.env.NODE_ENV === 'production') {
-  // Serve static files
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  
-  // Handle React routing, return all requests to React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
-} else {
-  // Development route for testing
-  app.get('/', (req, res) => {
-    res.json({ 
-      message: 'MyQuiz API Server',
-      status: 'running',
-      environment: process.env.NODE_ENV || 'development',
-      endpoints: {
-        auth: '/api/auth',
-        categories: '/api/categories',
-        questions: '/api/questions',
-        quiz: '/api/quiz',
-        users: '/api/users',
-        admin: '/api/admin'
-      }
+  try {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
     });
-  });
+  } catch (error) {
+    console.log('React build not found, serving API only');
+  }
 }
 
 // Error handling middleware
