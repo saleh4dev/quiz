@@ -50,7 +50,15 @@ if (process.env.NODE_ENV === 'production') {
     res.json({ 
       message: 'MyQuiz API Server',
       status: 'running',
-      environment: process.env.NODE_ENV || 'development'
+      environment: process.env.NODE_ENV || 'development',
+      endpoints: {
+        auth: '/api/auth',
+        categories: '/api/categories',
+        questions: '/api/questions',
+        quiz: '/api/quiz',
+        users: '/api/users',
+        admin: '/api/admin'
+      }
     });
   });
 }

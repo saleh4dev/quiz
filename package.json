@@ -10,7 +10,7 @@
     "build": "cd client && npm run build",
     "build:all": "npm run build && npm run install-all",
     "start": "node server/index.js",
-    "vercel-build": "npm run build && npm run db:reset",
+    "vercel-build": "cd client && npm install && npm run build && cd .. && npm run db:reset",
     "install-all": "npm install && cd client && npm install",
     "db:cleanup": "node server/database/cleanup.js",
     "db:add-sample": "node server/database/add-sample-data.js",
