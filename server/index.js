@@ -37,9 +37,21 @@ app.use('/api/admin', require('./routes/admin'));
 
 // Serve static files from React build
 if (process.env.NODE_ENV === 'production') {
+  // Serve static files
   app.use(express.static(path.join(__dirname, '../client/build')));
+  
+  // Handle React routing, return all requests to React app
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+} else {
+  // Development route for testing
+  app.get('/', (req, res) => {
+    res.json({ 
+      message: 'MyQuiz API Server',
+      status: 'running',
+      environment: process.env.NODE_ENV || 'development'
+    });
   });
 }
 
