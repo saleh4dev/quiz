@@ -1,0 +1,25 @@
+{
+  "name": "MyQuiz",
+  "description": "منصة المسابقات الثقافية التفاعلية",
+  "repository": "https://github.com/yourusername/myquiz",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "react", "quiz", "arabic"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    },
+    "JWT_SECRET": {
+      "description": "JWT Secret Key",
+      "generator": "secret"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "scripts": {
+    "postinstall": "npm run build"
+  }
+} 
